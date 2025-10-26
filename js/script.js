@@ -1,27 +1,140 @@
-// JavaScript for form handling, smooth scroll, EmailJS, animations
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Mobile Navigation Toggle ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
 
-
-        // Initialize EmailJS when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize EmailJS - Replace 'YOUR_PUBLIC_KEY' with your actual public key
-            if (typeof emailjs !== 'undefined') {
-                emailjs.init("6q3Xz_LJuR1_exAtT"); // Replace with your EmailJS public key
-            }
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
         });
+    }
 
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+    // --- Footer Current Year ---
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- Blog System ---
+    const postsContainer = document.getElementById('posts-container');
+    const postView = document.getElementById('post-view');
+    const blogIndex = document.getElementById('blog-index');
+    const searchInput = document.getElementById('blog-search');
+    const searchResultsCount = document.getElementById('search-results-count');
+
+    if (blogIndex) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+
+        if (slug) {
+            loadPost(slug);
+        } else {
+            loadBlogIndex();
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => loadBlogIndex(e.target.value));
+        }
+    }
+
+    async function loadBlogIndex(searchTerm = '') {
+        try {
+            const response = await fetch('assets/posts/posts.json');
+            if (!response.ok) throw new Error('Failed to load posts.json');
+            const data = await response.json();
+            
+            const filteredPosts = data.posts.filter(post => {
+                const term = searchTerm.toLowerCase();
+                const titleMatch = post.title.toLowerCase().includes(term);
+                const tagMatch = post.tags.some(tag => tag.toLowerCase().includes(term));
+                return titleMatch || tagMatch;
             });
-        });
+
+            renderBlogIndex(filteredPosts);
+
+            if (searchResultsCount) {
+                const count = filteredPosts.length;
+                searchResultsCount.textContent = `${count} post${count !== 1 ? 's' : ''} found.`;
+            }
+
+        } catch (error) {
+            console.error('Error loading blog index:', error);
+            if (postsContainer) postsContainer.innerHTML = '<p>Error loading posts. Please try again later.</p>';
+        }
+    }
+
+    function renderBlogIndex(posts) {
+        if (!postsContainer) return;
+        if (posts.length === 0) {
+            postsContainer.innerHTML = '<p>No posts found.</p>';
+            return;
+        }
+
+        postsContainer.innerHTML = posts.map(post => `
+            <article class="post-card">
+                <h2><a href="?slug=${post.slug}">${post.title}</a></h2>
+                <p class="post-card-meta">${new Date(post.date).toLocaleDateString()}</p>
+                <p>${post.excerpt}</p>
+                <div class="chips">
+                    ${post.tags.map(tag => `<span class="chip">${tag}</span>`).join('')}
+                </div>
+            </article>
+        `).join('');
+    }
+
+    async function loadPost(slug) {
+        if (!postView || !blogIndex) return;
+
+        try {
+            const response = await fetch(`assets/posts/${slug}.md`);
+            if (!response.ok) throw new Error('Post not found');
+            const markdown = await response.text();
+            const postData = await getPostData(slug);
+
+            const html = parseMarkdown(markdown);
+
+            blogIndex.hidden = true;
+            postView.hidden = false;
+            postView.innerHTML = `
+                <h1>${postData.title}</h1>
+                <p class="post-view-meta">Published on ${new Date(postData.date).toLocaleDateString()}</p>
+                ${html}
+                <a href="blog.html">← Back to all posts</a>
+            `;
+        } catch (error) {
+            console.error('Error loading post:', error);
+            blogIndex.hidden = false;
+            postView.innerHTML = '<p>Sorry, the requested post could not be found.</p>';
+        }
+    }
+
+    async function getPostData(slug) {
+        const response = await fetch('assets/posts/posts.json');
+        const data = await response.json();
+        return data.posts.find(p => p.slug === slug);
+    }
+
+    function parseMarkdown(text) {
+        const toHtml = text
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/`([^`]+)`/gim, '<code>$1</code>')
+            .replace(/\n\* (.*)/gim, (match, p1) => `<li>${p1}</li>`)
+            .replace(/(\n)?<\/li><li>/gim, '</li><li>')
+            .replace(/<li>/gim, '<ul><li>')
+            .replace(/<\/li>(?!<li>)/gim, '</li></ul>')
+            .replace(/\[([^\]]+)\]\(([^\)]+)\)/gim, '<a href="$2">$1</a>')
+            .replace(/```(\w*)\n([\s\S]*?)\n```/gim, '<pre><code>$2</code></pre>')
+            .replace(/\n/gim, '<br>');
+
+        return toHtml.trim();
+    }
 
         // Contact form submission
         document.getElementById('contact-form').addEventListener('submit', function(e) {
@@ -50,7 +163,7 @@
             };
 
             // EmailJS send function
-            emailjs.send('service_ilyn8y2', 'template_xs8vdsi', formData)
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     alert('Message sent successfully! I\'ll get back to you soon😊');
@@ -64,41 +177,4 @@
                     btn.disabled = false;
                 });
         });
-
-        // Floating tech icons click handlers
-        document.querySelectorAll('.floating-tech').forEach(tech => {
-            tech.addEventListener('click', function() {
-                this.style.animationPlayState = this.style.animationPlayState === 'paused' ? 'running' : 'paused';
-            });
-        });
-
-        // Navbar background change on scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(15, 15, 35, 0.98)';
-                nav.style.boxShadow = '0 4px 30px rgba(0, 212, 255, 0.2)';
-            } else {
-                nav.style.background = 'rgba(15, 15, 35, 0.95)';
-                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
-            }
-        });
-
-        // Add animation to cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.experience-card, .project-card, .skill-category').forEach(card => {
-            observer.observe(card);
-        });
-    
+});

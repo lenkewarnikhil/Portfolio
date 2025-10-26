@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "slug": "first-post",
+      "title": "My First Post",
+      "date": "2025-10-26",
+      "excerpt": "This is a test post to demonstrate the blog functionality. It includes various Markdown elements.",
+      "tags": ["general", "tech"]
+    },
+    {
+      "slug": "dsa-to-dev",
+      "title": "From DSA to Dev: A Journey",
+      "date": "2025-10-24",
+      "excerpt": "Exploring the transition from mastering Data Structures and Algorithms to becoming a full-fledged developer.",
+      "tags": ["dsa", "career", "development"]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Lenkewar Nikhil</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/favicon.ico" sizes="any">
+    <link rel="icon" href="assets/favicon-icons/apple-touch-icon.png" type="image/png">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">Lenkewar Nikhil</div>
+            <nav class="main-nav">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="blog.html" aria-current="page">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="main-content">
+        <section id="blog-index">
+            <header class="section-header">
+                <h1>Blog</h1>
+                <p>Thoughts on code, career, and continuous learning.</p>
+            </header>
+            <div class="blog-controls">
+                <input type="search" id="blog-search" placeholder="Search posts by title or tag..." aria-label="Search blog posts">
+                <p id="search-results-count" class="search-results-count" aria-live="polite"></p>
+            </div>
+            <div id="posts-container">
+                <!-- Posts will be loaded here by JavaScript -->
+                <noscript>
+                    <p>JavaScript is required to view and filter blog posts. Please enable it in your browser.</p>
+                    <p>Alternatively, you can read the posts directly:</p>
+                    <ul>
+                        <li><a href="assets/posts/first-post.md">First Post</a></li>
+                        <li><a href="assets/posts/dsa-to-dev.md">From DSA to Dev</a></li>
+                    </ul>
+                </noscript>
+            </div>
+        </section>
+        <article id="post-view" class="post-view" hidden></article>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="current-year"></span> Lenkewar Nikhil. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
