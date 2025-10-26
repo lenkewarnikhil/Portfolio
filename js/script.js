@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // === EmailJS credentials (inlined as requested) ===
+    const EMAILJS_SERVICE_ID  = "service_ilyn8y2";
+    const EMAILJS_TEMPLATE_ID = "template_xs8vdsi";
+    const EMAILJS_PUBLIC_KEY  = "6q3Xz_LJuR1_exAtT";
+
     // Initialize EmailJS
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init(EMAILJS_PUBLIC_KEY);
+    if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY) {
+        try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (e) { /* noop */ }
     }
 
     // --- Mobile Navigation Toggle ---
@@ -11,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
             const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navToggle.setAttribute('aria-expanded', String(!isExpanded));
             navMenu.classList.toggle('active');
         });
     }
@@ -135,30 +140,42 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/<li>/gim, '<ul><li>')
             .replace(/<\/li>(?!<li>)/gim, '</li></ul>')
             .replace(/\[([^\]]+)\]\(([^\)]+)\)/gim, '<a href="$2">$1</a>')
-            .replace(/```(\w*)\n([\s\S]*?)\n```/gim, '<pre><code>$2</code></pre>')
+            .replace(/```(\w*)\n([\s\S]*?)\n```/gim, '<pre><code>${2}</code></pre>')
             .replace(/\n/gim, '<br>');
 
         return toHtml.trim();
     }
 
-        // Contact form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+    // --- Contact form submission (inline messages, no alerts) ---
+    const formEl = document.getElementById('contact-form');
+    const formStatus = document.getElementById('contact-status');
+
+    if (formEl) {
+        formEl.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const btn = this.querySelector('.submit-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
+            const originalText = btn ? btn.innerHTML : '';
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                btn.disabled = true;
+            }
+
+            const setStatus = (msg, color) => {
+                if (!formStatus) return;
+                formStatus.textContent = msg;
+                formStatus.style.color = color;
+                window.clearTimeout(setStatus._t);
+                setStatus._t = window.setTimeout(() => { formStatus.textContent = ''; }, 5000);
+            };
 
             // Check if EmailJS is available
             if (typeof emailjs === 'undefined') {
-                if (formStatus) {
-                    formStatus.textContent = 'EmailJS is not loaded. Please check your internet connection or contact me directly at lenkewarnikhil104@gmail.com';
-                    formStatus.style.color = 'red';
-                    setTimeout(() => { if(formStatus) formStatus.textContent = ''; }, 5000);
+                setStatus('EmailJS is not loaded. Please check your internet connection or contact me directly at lenkewarnikhil104@gmail.com', 'red');
+                if (btn) {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
                 }
-                btn.innerHTML = originalText;
-                btn.disabled = false;
                 return;
             }
 
@@ -173,25 +190,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // EmailJS send function
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData)
-                .then(function(response) {
+                .then((response) => {
                     console.log('SUCCESS!', response.status, response.text);
-                    if (formStatus) {
-                        formStatus.textContent = 'Message sent successfully! I\'ll get back to you soon😊';
-                        formStatus.style.color = 'green';
-                        setTimeout(() => { if(formStatus) formStatus.textContent = ''; }, 5000);
-                    }
-                    document.getElementById('contact-form').reset();
-                }, function(error) {
+                    setStatus('Message sent successfully! I\'ll get back to you soon😊', 'green');
+                    this.reset();
+                }, (error) => {
                     console.log('FAILED...', error);
-                    if (formStatus) {
-                        formStatus.textContent = 'Failed😥. Please try again or contact me directly at l.nikhil.codes@gmail.com';
-                        formStatus.style.color = 'red';
-                        setTimeout(() => { if(formStatus) formStatus.textContent = ''; }, 5000);
-                    }
+                    setStatus('Failed😥. Please try again or contact me directly at l.nikhil.codes@gmail.com', 'red');
                 })
-                .finally(function() {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
+                .finally(() => {
+                    if (btn) {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }
                 });
         });
+    }
 });

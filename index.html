@@ -188,7 +188,7 @@
                     <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Send Message</button>
-                <p id="form-status" role="status"></p>
+                <p id="contact-status" class="muted" aria-live="polite"></p>
             </form>
         </section>
     </main>
@@ -197,7 +197,8 @@
         <p>&copy; <span id="current-year"></span> Lenkewar Nikhil. All rights reserved.</p>
     </footer>
 
-    <script src="js/env.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

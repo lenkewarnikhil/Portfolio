@@ -353,10 +353,6 @@ pre {
     opacity: 0.8;
 }
 
-#form-status {
-    margin-top: 1rem;
-    font-weight: bold;
-}
 
 /* --- Footer --- */
 .site-footer {
@@ -509,3 +505,7 @@ pre {
         border: 1px solid #ccc;
     }
 }
+
+#contact-status.status-info{ color:#444; }
+#contact-status.status-success{ color: #1a7f37; }
+#contact-status.status-error{ color: #a52828; }
