@@ -152,7 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Check if EmailJS is available
             if (typeof emailjs === 'undefined') {
-                alert('EmailJS is not loaded. Please check your internet connection or contact me directly at lenkewarnikhil104@gmail.com');
+                if (formStatus) {
+                    formStatus.textContent = 'EmailJS is not loaded. Please check your internet connection or contact me directly at lenkewarnikhil104@gmail.com';
+                    formStatus.style.color = 'red';
+                    setTimeout(() => { if(formStatus) formStatus.textContent = ''; }, 5000);
+                }
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 return;
@@ -171,11 +175,19 @@ document.addEventListener('DOMContentLoaded', () => {
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
-                    alert('Message sent successfully! I\'ll get back to you soon😊');
+                    if (formStatus) {
+                        formStatus.textContent = 'Message sent successfully! I\'ll get back to you soon😊';
+                        formStatus.style.color = 'green';
+                        setTimeout(() => { if(formStatus) formStatus.textContent = ''; }, 5000);
+                    }
                     document.getElementById('contact-form').reset();
                 }, function(error) {
                     console.log('FAILED...', error);
-                    alert('Failed😥. Please try again or contact me directly at l.nikhil.codes@gmail.com');
+                    if (formStatus) {
+                        formStatus.textContent = 'Failed😥. Please try again or contact me directly at l.nikhil.codes@gmail.com';
+                        formStatus.style.color = 'red';
+                        setTimeout(() => { if(formStatus) formStatus.textContent = ''; }, 5000);
+                    }
                 })
                 .finally(function() {
                     btn.innerHTML = originalText;
