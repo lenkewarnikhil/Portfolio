@@ -1,5 +1,13 @@
 {
   "posts": [
+
+    {
+      "slug": "ai",
+"title": "Your First Steps Into AI: Understanding RAG, Agentic AI, and How It All Fits Together",
+"date": "2025-10-29",
+"excerpt": "A beginner-friendly roadmap to the modern AI universe, including RAG, Generative AI, and Agentic AI.",
+"tags": ["AI", "RAG", "Agentic AI", "Beginner Guide", "Machine Learning"]
+    },
     {
       "slug": "first-post",
       "title": "My First Post",
@@ -14,5 +22,6 @@
       "excerpt": "Exploring the transition from mastering Data Structures and Algorithms to becoming a full-fledged developer.",
       "tags": ["dsa", "career", "development"]
     }
+
   ]
 }
