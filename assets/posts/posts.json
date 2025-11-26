@@ -3,24 +3,25 @@
 
     {
       "slug": "ai",
-"title": "Your First Steps Into AI: Understanding RAG, Agentic AI, and How It All Fits Together",
-"date": "2025-10-29",
-"excerpt": "A beginner-friendly roadmap to the modern AI universe, including RAG, Generative AI, and Agentic AI.",
-"tags": ["AI", "RAG", "Agentic AI", "Beginner Guide", "Machine Learning"]
+      "title": "Your First Steps Into AI: Understanding RAG, Agentic AI, and How It All Fits Together",
+      "date": "2025-10-29",
+      "excerpt": "A friendly, handwritten-style introduction to the modern AI universe, including RAG, Generative AI, and Agentic AI.",
+      "tags": ["AI", "RAG", "Agentic AI", "Beginner Guide", "Machine Learning"]
     },
-    {
-      "slug": "first-post",
-      "title": "My First Post",
-      "date": "2025-10-26",
-      "excerpt": "This is a test post to demonstrate the blog functionality. It includes various Markdown elements.",
-      "tags": ["general", "tech"]
-    },
+    
     {
       "slug": "dsa-to-dev",
-      "title": "From DSA to Dev: A Journey",
+      "title": "From DSA to Dev: A Journey (The Honest Version)",
       "date": "2025-10-24",
-      "excerpt": "Exploring the transition from mastering Data Structures and Algorithms to becoming a full-fledged developer.",
+      "excerpt": "A personal reflection on moving from LeetCode-style DSA problems to building real-world applications.",
       "tags": ["dsa", "career", "development"]
+    },
+    {
+      "slug": "why-i-built-this-portfolio",
+      "title": "Why I Built This Portfolio",
+      "date": "2025-11-26",
+      "excerpt": "A honest, handwritten-style note about turning this portfolio into a personal corner of the internet, not just a resume.",
+      "tags": ["personal", "journey", "portfolio"]
     }
 
   ]

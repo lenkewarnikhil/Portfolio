@@ -1,10 +1,15 @@
 # Your First Steps Into AI: Understanding RAG, Agentic AI, and How It All Fits Together
 
-Artificial Intelligence is a vast galaxy, buzzing with innovation and dazzling possibilities. If you're just launching your ship into this universe, welcome aboard. Fasten your curiosity seatbelts and let’s navigate the map together.
+I still remember the first time I tried to “learn AI”.  
+I opened a few articles, saw words like *embeddings*, *vector databases*, *RAG*, *agents*, and quietly closed the tabs.
 
-This guide will help you understand the most popular branches in AI today:  
+If that’s you right now, you’re not alone.
+
+This is the guide I wish I had when I started—something that feels less like a research paper and more like a friend walking you through the map.
+
+We’ll gently explore the most popular branches in AI today:  
 Traditional ML, Deep Learning, Generative AI, RAG, and the rising star Agentic AI.  
-Plus, we’ll see how RAG and Agents work together like a dynamic duo!
+And we’ll see how RAG and Agents actually fit together in practice.
 
 ---
 
