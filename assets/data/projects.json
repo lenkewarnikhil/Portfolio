@@ -1,0 +1,28 @@
+{
+  "projects": [
+    {
+      "title": "AI-Onboarder",
+      "description": "AI developer productivity platform that analyzes codebases and auto-generates onboarding documentation.",
+      "tags": ["Python", "LLM", "OAuth", "Google Gemini"],
+      "link": "#"
+    },
+    {
+      "title": "Nikhil’s Cloud",
+      "description": "Self-hosted cloud storage system with secure file access, multi-user support and personal hardware deployment.",
+      "tags": ["Python", "Docker", "Kubernetes", "Security"],
+      "link": "#"
+    },
+    {
+      "title": "DH-AES Scheme for IoT Healthcare",
+      "description": "Secure communication system using Diffie-Hellman + AES for IoT medical telemetry with IEEE publication.",
+      "tags": ["Python", "Cryptography", "IoT", "Research"],
+      "link": "#"
+    },
+    {
+      "title": "Leaderboard Website",
+      "description": "Tracks coding scores with scraping, search, and analytics dashboards for student performance.",
+      "tags": ["HTML", "JavaScript", "Node.js", "MongoDB"],
+      "link": "https://leaderboardcc.netlify.app/"
+    }
+  ]
+}

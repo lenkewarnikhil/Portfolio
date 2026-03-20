@@ -1,0 +1,24 @@
+{
+  "experience": [
+    {
+      "title": "Software Engineer (Backend Lead)",
+      "company": "Chimera Technologies Pvt Ltd, Bangalore",
+      "period": "June 2025 – Present",
+      "details": [
+        "Lead a team of backend engineers for an AI-driven pharma review platform.",
+        "Designed scalable FastAPI + PostgreSQL data pipelines for high-volume AI data.",
+        "Delivered Temporal and cron workflow orchestration with auditing.",
+        "Deployed and managed Kubernetes/OpenShift microservices with ArgoCD."
+      ]
+    },
+    {
+      "title": "Software Developer Intern",
+      "company": "Trailbliz (Elevatebox Technologies Pvt Ltd)",
+      "period": "Feb 2025 – June 2025",
+      "details": [
+        "Built React, Angular and Node.js web applications.",
+        "Mentored 600+ students in data structures and algorithms."
+      ]
+    }
+  ]
+}

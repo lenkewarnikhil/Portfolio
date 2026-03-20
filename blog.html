@@ -1,69 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Lenkewar Nikhil</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog - Lenkewar Nikhil. Articles about backend engineering, AI, data systems, and development journey.">
+  <meta name="theme-color" content="#081120">
+  <title>Blog - Lenkewar Nikhil</title>
+  <link rel="stylesheet" href="./src/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon/site.webmanifest">
+  <style>
+    .blog-post-content {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .blog-post-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .back-link {
+      margin-bottom: 1rem;
+    }
+
+    .back-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
-    <header class="site-header">
-        <div class="header-container">
-            <div class="logo">Lenkewar Nikhil</div>
-            <nav class="main-nav">
-                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
-                    <span class="sr-only">Menu</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#experience">Experience</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li><a href="blog.html" aria-current="page">Blog</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <div class="app-shell">
+    <div class="scroll-progress"></div>
+
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="./assets/favicon/favicon.ico" alt="Logo" class="logo-icon">
         </div>
+        <ul class="nav-links">
+          <li><a href="./index.html#home">Home</a></li>
+          <li><a href="./index.html#experience">Experience</a></li>
+          <li><a href="./index.html#projects">Projects</a></li>
+          <li><a href="./index.html#skills">Skills</a></li>
+          <li><a href="./index.html#blog">Blog</a></li>
+          <li><a href="./index.html#contact">Contact</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
     </header>
 
-    <main id="main-content" class="main-content">
-        <section id="blog-index">
-            <header class="section-header">
-                <h1>Blog</h1>
-                <p>Thoughts on code, career, and continuous learning.</p>
-            </header>
-            <div class="blog-controls">
-                <input type="search" id="blog-search" placeholder="Search posts by title or tag..." aria-label="Search blog posts">
-                <p id="search-results-count" class="search-results-count" aria-live="polite"></p>
-            </div>
-            <div id="posts-container">
-                <!-- Posts will be loaded here by JavaScript -->
-                <noscript>
-                    <p>JavaScript is required to view and filter blog posts. Please enable it in your browser.</p>
-                    <p>Alternatively, you can read the posts directly:</p>
-                    <ul>
-                        <li><a href="assets/posts/ai.md">Your First Steps Into AI</a></li>
-                        <li><a href="assets/posts/first-post.md">First Post</a></li>
-                        <li><a href="assets/posts/dsa-to-dev.md">From DSA to Dev</a></li>
-                    </ul>
-                </noscript>
-            </div>
-        </section>
-        <article id="post-view" class="post-view" hidden></article>
+    <main>
+      <section class="section">
+        <div class="container blog-post-content" id="blog-content">
+          <div class="back-link">
+            <a href="./index.html#blog">Back to all articles</a>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; <span id="current-year"></span> Lenkewar Nikhil. All rights reserved.</p>
+    <footer>
+      <div class="container footer-shell">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Lenkewar Nikhil</h3>
+            <p>Backend Engineer | Data Systems Builder | AI Enthusiast</p>
+            <p>Based in Bangalore, India</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="./index.html#home">Home</a></li>
+              <li><a href="./index.html#projects">Projects</a></li>
+              <li><a href="./index.html#blog">Blog</a></li>
+              <li><a href="./index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Resources</h3>
+            <ul class="footer-links">
+              <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Lenkewar Nikhil. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
+  </div>
 
-    <script src="js/script.js"></script>
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="./js/env.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+  <script src="./src/js/main.js"></script>
+  <script>
+    function parseMarkdown(md) {
+      let html = md;
+      html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+      html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+      html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+      html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+      html = html.replace(/```(.+?)```/gs, '<pre><code>$1</code></pre>');
+      html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+      html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+      html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+      html = html.replace(/^\- (.+)$/gm, '<li>$1</li>');
+      html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+      html = html.split('\n\n').map((para) => {
+        if (para.startsWith('<')) return para;
+        if (para.trim() === '') return '';
+        return '<p>' + para + '</p>';
+      }).join('\n');
+      html = html.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      return html;
+    }
+
+    async function loadBlogPost() {
+      const slug = window.location.hash.replace('#blog/', '') || 'ai';
+
+      try {
+        const response = await fetch(`./assets/posts/${slug}.md`);
+        if (!response.ok) {
+          throw new Error('Blog post not found');
+        }
+
+        const markdown = await response.text();
+        const html = parseMarkdown(markdown);
+        const blogContent = document.getElementById('blog-content');
+
+        blogContent.innerHTML = `
+          <div class="back-link">
+            <a href="./index.html#blog">Back to all articles</a>
+          </div>
+          <div class="glass-card">
+            <article class="blog-post-article">
+              ${html}
+            </article>
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error loading blog:', error);
+        document.getElementById('blog-content').innerHTML = `
+          <div class="back-link">
+            <a href="./index.html#blog">Back to all articles</a>
+          </div>
+          <div class="glass-card">
+            <p style="padding: 2rem; text-align: center;">Article not found. <a href="./index.html#blog">Return to blog</a></p>
+          </div>
+        `;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBlogPost);
+    window.addEventListener('hashchange', loadBlogPost);
+  </script>
 </body>
 </html>

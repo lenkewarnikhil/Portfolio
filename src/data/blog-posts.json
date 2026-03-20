@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "slug": "ai",
+      "title": "Your First Steps Into AI: Understanding RAG, Agentic AI, and How It All Fits Together",
+      "date": "2025-10-29",
+      "readTime": "12 min read",
+      "excerpt": "A friendly, beginner-style introduction to the modern AI universe, including RAG, Generative AI, and Agentic AI. Learn how these technologies work together to build intelligent systems.",
+      "tags": ["AI", "RAG", "Agents", "Machine Learning", "Beginner Guide"],
+      "featured": true
+    },
+    {
+      "id": 2,
+      "slug": "dsa-to-dev",
+      "title": "From DSA to Dev: A Journey (The Honest Version)",
+      "date": "2025-10-24",
+      "readTime": "8 min read",
+      "excerpt": "A personal reflection on transitioning from LeetCode-style DSA problems to building real-world applications. Honest insights on what actually bridges the gap.",
+      "tags": ["DSA", "Career", "Development", "Learning"],
+      "featured": true
+    },
+    {
+      "id": 3,
+      "slug": "why-i-built-this-portfolio",
+      "title": "Why I Built This Portfolio",
+      "date": "2025-11-26",
+      "readTime": "6 min read",
+      "excerpt": "A honest note about turning this portfolio into a personal corner of the internet—not just a resume. My thoughts on progress, learning, and growth.",
+      "tags": ["Personal", "Journey", "Portfolio"],
+      "featured": false
+    }
+  ]
+}
