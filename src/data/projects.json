@@ -1,0 +1,76 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "AI-Onboarder",
+      "tagline": "AI Developer Productivity Platform",
+      "description": "An intelligent platform that analyzes codebases and automatically generates comprehensive onboarding documentation using advanced LLMs.",
+      "longDescription": "AI-Onboarder revolutionizes developer onboarding by automatically analyzing your codebase structure, architecture patterns, and implementation details to generate human-readable documentation. Built with cutting-edge AI integration.",
+      "tags": ["Python", "LLM", "Google Gemini", "OAuth", "GitHub"],
+      "technologies": ["FastAPI", "PostgreSQL", "LangChain", "React"],
+      "year": 2026,
+      "status": "Active Development",
+      "highlights": [
+        "Integrated Google Gemini LLM for intelligent code analysis",
+        "Implemented OAuth-based GitHub SSO authentication",
+        "Automated repository ingestion and processing workflows",
+        "Real-time documentation generation"
+      ],
+      "link": "#"
+    },
+    {
+      "id": 2,
+      "title": "Nikhil's Cloud",
+      "tagline": "Personal Cloud Storage Platform",
+      "description": "A self-hosted cloud storage system offering secure file access, multi-user support, and deployment on personal hardware infrastructure.",
+      "longDescription": "A fully self-hosted cloud platform with enterprise-grade security features, enabling secure file management, sharing, and backup across multiple users.",
+      "tags": ["Python", "Docker", "Kubernetes", "Security", "Storage"],
+      "technologies": ["FastAPI", "PostgreSQL", "Docker", "Kubernetes", "React"],
+      "year": 2026,
+      "status": "Completed",
+      "highlights": [
+        "End-to-end encryption for secure file storage",
+        "Multi-user access control and permission management",
+        "Kubernetes deployment on personal infrastructure",
+        "Real-time sync capabilities"
+      ],
+      "link": "#"
+    },
+    {
+      "id": 3,
+      "title": "DH-AES Scheme for IoT Healthcare",
+      "tagline": "Cryptographic Communication for Medical IoT",
+      "description": "An innovative secure communication system combining Diffie-Hellman and AES encryption for IoT medical telemetry with peer-reviewed publication.",
+      "longDescription": "Research-backed cryptographic implementation for secure IoT healthcare communications. Published at IEEE Conference.",
+      "tags": ["Python", "Cryptography", "IoT", "Research", "Security"],
+      "technologies": ["Python", "Cryptography Libraries", "IoT Protocols"],
+      "year": 2025,
+      "status": "Published",
+      "highlights": [
+        "Developed DH-AES hybrid encryption scheme",
+        "Published research findings at IEEE Conference",
+        "Tested across multiple IoT healthcare devices",
+        "Addressed real-world medical data security challenges"
+      ],
+      "link": "#"
+    },
+    {
+      "id": 4,
+      "title": "Leaderboard Website",
+      "tagline": "Competitive Coding Analytics Platform",
+      "description": "A dynamic leaderboard tracking coding competition scores with advanced web scraping, intelligent search, and comprehensive performance analytics.",
+      "longDescription": "Tracks competitive coding scores with real-time updates, powerful search capabilities, and detailed analytics dashboards for student performance monitoring.",
+      "tags": ["HTML", "JavaScript", "Node.js", "MongoDB", "Analytics"],
+      "technologies": ["Node.js", "Express", "MongoDB", "Vue.js", "Chart.js"],
+      "year": 2025,
+      "status": "Live",
+      "highlights": [
+        "Real-time leaderboard updates",
+        "Advanced search and filtering",
+        "Performance analytics dashboard",
+        "Multi-platform responsive design"
+      ],
+      "link": "https://leaderboardcc.netlify.app/"
+    }
+  ]
+}

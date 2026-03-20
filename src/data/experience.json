@@ -1,0 +1,35 @@
+{
+  "experience": [
+    {
+      "id": 1,
+      "title": "Software Engineer (Backend Lead)",
+      "company": "Chimera Technologies Pvt Ltd",
+      "location": "Bangalore",
+      "period": "June 2025 – Present",
+      "type": "Full-time",
+      "description": "Leading backend development for an AI-powered review platform serving the pharmaceutical domain.",
+      "highlights": [
+        "Lead a team of 3-4 backend engineers delivering scalable systems",
+        "Designed and developed data pipelines using FastAPI and PostgreSQL for high-volume AI data processing",
+        "Implemented workflow orchestration and cron pipelines using Temporal for automated data processing",
+        "Built comprehensive data validation and auditing systems for AI chatbot/voicebot output evaluation",
+        "Deployed microservices on Kubernetes (OpenShift) using ArgoCD for CI/CD automation",
+        "Integrated Azure Entra ID RBAC for enterprise-grade access control"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Software Developer Intern",
+      "company": "Trailbliz (Elevatebox Technologies Pvt Ltd)",
+      "location": "On-site",
+      "period": "Feb 2025 – June 2025",
+      "type": "Internship",
+      "description": "Built web applications and mentored students in data structures and algorithms.",
+      "highlights": [
+        "Developed full-stack web applications using React, Angular, and Node.js",
+        "Mentored 600+ students in Data Structures and Algorithms through structured learning programs",
+        "Collaborated with cross-functional teams to deliver production-ready features"
+      ]
+    }
+  ]
+}
