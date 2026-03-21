@@ -891,6 +891,8 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-primary);
   font-weight: 700;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .project-links a:hover,
@@ -921,37 +923,11 @@ main {
   align-items: stretch;
 }
 
-.blog-featured-media {
-  border-radius: 22px;
-  min-height: 100%;
-  padding: 1.2rem;
-  background:
-    linear-gradient(135deg, rgba(125, 211, 252, 0.22), rgba(129, 140, 248, 0.2) 45%, rgba(251, 113, 133, 0.18));
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.blog-featured-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 1rem;
-}
-
-.blog-featured-label {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 0.5rem 0.85rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
-  color: white;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.blog-featured-copy {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  color: white;
-  max-width: 12ch;
+  min-width: 0;
 }
 
 .blog-meta {
