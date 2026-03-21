@@ -530,7 +530,7 @@ const Portfolio = {
       if (featuredPost) {
         html += `
           <div class="glass-card blog-card blog-featured" data-animate>
-            <div>
+            <div class="blog-featured-content">
               <div class="blog-meta">
                 <span class="blog-date">${new Date(featuredPost.date).toLocaleDateString()}</span>
                 <span class="blog-read-time">${featuredPost.readTime}</span>
@@ -541,10 +541,6 @@ const Portfolio = {
                 ${featuredPost.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
               </div>
               <a href="./blog.html#blog/${featuredPost.slug}" class="read-more">Read Full Article</a>
-            </div>
-            <div class="blog-featured-media">
-              <span class="blog-featured-label">Featured Story</span>
-              <div class="blog-featured-copy">Backend engineering, systems thinking, and product building.</div>
             </div>
           </div>
         `;

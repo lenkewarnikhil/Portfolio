@@ -2,32 +2,42 @@
   "posts": [
     {
       "id": 1,
+      "slug": "temporal-cron-schedules",
+      "title": "Temporal Cron Schedules: A Better Way to Run Reliable Background Work",
+      "date": "2026-03-20",
+      "readTime": "9 min read",
+      "excerpt": "A practical breakdown of Temporal cron schedules, why they are more reliable than traditional cron jobs, and how they help build durable backend systems.",
+      "tags": ["Temporal", "Cron", "Backend", "Distributed Systems", "Reliability"],
+      "featured": true
+    },
+    {
+      "id": 2,
+      "slug": "building-my-own-cloud",
+      "title": "Building My Own Cloud: What a Self-Hosted Storage Project Taught Me",
+      "date": "2026-03-18",
+      "readTime": "8 min read",
+      "excerpt": "An engineering-focused write-up on my cloud storage project, covering architecture, access control, deployment, and what I learned from building it end to end.",
+      "tags": ["Cloud", "Self-Hosting", "FastAPI", "Infrastructure", "Architecture"],
+      "featured": false
+    },
+    {
+      "id": 3,
       "slug": "ai",
       "title": "Your First Steps Into AI: Understanding RAG, Agentic AI, and How It All Fits Together",
       "date": "2025-10-29",
       "readTime": "12 min read",
       "excerpt": "A friendly, beginner-style introduction to the modern AI universe, including RAG, Generative AI, and Agentic AI. Learn how these technologies work together to build intelligent systems.",
       "tags": ["AI", "RAG", "Agents", "Machine Learning", "Beginner Guide"],
-      "featured": true
+      "featured": false
     },
     {
-      "id": 2,
+      "id": 4,
       "slug": "dsa-to-dev",
       "title": "From DSA to Dev: A Journey (The Honest Version)",
       "date": "2025-10-24",
       "readTime": "8 min read",
       "excerpt": "A personal reflection on transitioning from LeetCode-style DSA problems to building real-world applications. Honest insights on what actually bridges the gap.",
       "tags": ["DSA", "Career", "Development", "Learning"],
-      "featured": true
-    },
-    {
-      "id": 3,
-      "slug": "why-i-built-this-portfolio",
-      "title": "Why I Built This Portfolio",
-      "date": "2025-11-26",
-      "readTime": "6 min read",
-      "excerpt": "A honest note about turning this portfolio into a personal corner of the internet—not just a resume. My thoughts on progress, learning, and growth.",
-      "tags": ["Personal", "Journey", "Portfolio"],
       "featured": false
     }
   ]
