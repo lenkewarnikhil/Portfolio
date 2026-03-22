@@ -1,0 +1,8 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" rx="36" fill="#0B1322"/>
+  <rect x="54" y="54" width="1092" height="567" rx="30" fill="#10192C"/>
+  <path d="M180 320C180 272 216 236 262 236C288 236 312 248 328 268C338 206 392 160 456 160C528 160 586 218 586 290H596C654 290 702 338 702 396C702 454 654 502 596 502H262C190 502 132 444 132 372C132 332 150 296 180 320Z" fill="#8EA4D2" fill-opacity="0.22"/>
+  <rect x="760" y="176" width="274" height="24" rx="12" fill="#E5E7EB" fill-opacity="0.2"/>
+  <rect x="760" y="220" width="214" height="18" rx="9" fill="#E5E7EB" fill-opacity="0.12"/>
+  <text x="92" y="592" fill="#E5E7EB" font-size="34" font-family="Inter, Arial, sans-serif">Replace with blog cover image</text>
+</svg>

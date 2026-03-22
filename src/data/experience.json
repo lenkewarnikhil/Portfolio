@@ -30,6 +30,18 @@
         "Mentored 600+ students in Data Structures and Algorithms through structured learning programs",
         "Collaborated with cross-functional teams to deliver production-ready features"
       ]
+    },
+    {
+      "id": 3,
+      "title": "DSA Student Mentor",
+      "company": "Smart Interviews",
+      "location": "Hyderabad, Telangana, India",
+      "period": "Sep 2024 - Jan 2025",
+      "type": "Internship",
+      "description": "Mentored students in Data Structures and Algorithms through structured learning sessions.",
+      "highlights": [
+        "DSA"
+      ]
     }
   ]
 }

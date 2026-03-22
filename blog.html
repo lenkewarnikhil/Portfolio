@@ -4,37 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Blog - Lenkewar Nikhil. Articles about backend engineering, AI, data systems, and development journey.">
+  <meta name="keywords" content="Lenkewar Nikhil blog,backend engineering blog,AI blog,data systems blog,lenkewarnikhil.in">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#081120">
   <title>Blog - Lenkewar Nikhil</title>
+  <link rel="canonical" href="https://lenkewarnikhil.in/blog.html">
   <link rel="stylesheet" href="./src/css/styles.css">
   <link rel="icon" type="image/svg+xml" href="./assets/favicon/site.webmanifest">
-  <style>
-    .blog-post-content {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .blog-post-meta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .back-link {
-      margin-bottom: 1rem;
-    }
-
-    .back-link a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-  </style>
+  <meta property="og:title" content="Blog | Lenkewar Nikhil">
+  <meta property="og:description" content="Articles about backend engineering, AI, data systems, and product-building by Lenkewar Nikhil.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lenkewarnikhil.in/blog.html">
+  <meta property="og:image" content="https://lenkewarnikhil.in/assets/blog-previews/temporal-cron-schedules.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog | Lenkewar Nikhil">
+  <meta name="twitter:description" content="Backend engineering, AI, and data systems articles by Lenkewar Nikhil.">
+  <meta name="twitter:image" content="https://lenkewarnikhil.in/assets/blog-previews/temporal-cron-schedules.svg">
 </head>
 <body>
+  <div class="ambient-canvas" aria-hidden="true">
+    <div class="ambient-blob ambient-blob-one"></div>
+    <div class="ambient-blob ambient-blob-two"></div>
+    <div class="ambient-blob ambient-blob-three"></div>
+  </div>
+  <div class="space-fleet" aria-hidden="true">
+    <span class="space-object object-rocket"></span>
+    <span class="space-object object-astronaut"></span>
+    <span class="space-object object-ufo"></span>
+    <span class="space-object object-comet"></span>
+    <span class="space-object object-satellite"></span>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
   <div class="app-shell">
     <div class="scroll-progress"></div>
 
@@ -89,9 +90,9 @@
           <div class="footer-section">
             <h3>Resources</h3>
             <ul class="footer-links">
-              <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-              <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a></li>
+              <li><a href="https://github.com/lenkewarnikhil" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/lenkewar-nikhil/" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="https://x.com/lenkewar_nikhil" target="_blank" rel="noopener">X</a></li>
             </ul>
           </div>
         </div>
@@ -149,7 +150,7 @@
           <div class="back-link">
             <a href="./index.html#blog">Back to all articles</a>
           </div>
-          <div class="glass-card">
+          <div class="glass-card blog-post-frame">
             <article class="blog-post-article">
               ${html}
             </article>
@@ -161,7 +162,7 @@
           <div class="back-link">
             <a href="./index.html#blog">Back to all articles</a>
           </div>
-          <div class="glass-card">
+          <div class="glass-card blog-post-frame">
             <p style="padding: 2rem; text-align: center;">Article not found. <a href="./index.html#blog">Return to blog</a></p>
           </div>
         `;
