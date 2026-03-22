@@ -7,73 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initializePortfolio();
 });
 
-// Toast Notification System
-const Toast = {
-  show(message, type = 'info', duration = 4000) {
-    const container = document.getElementById('toast-container');
-    if (!container) return;
-
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    const title = this.getTitle(type);
-    toast.innerHTML = `
-      <div class="toast-glow"></div>
-      <div class="toast-content">
-        <span class="toast-icon">${this.getIcon(type)}</span>
-        <div class="toast-copy">
-          <div class="toast-title">${title}</div>
-          <div class="toast-message">${message}</div>
-        </div>
-      </div>
-      <div class="toast-progress"></div>
-    `;
-
-    container.appendChild(toast);
-
-    // Trigger animation
-    setTimeout(() => toast.classList.add('show'), 10);
-
-    // Remove after duration
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => toast.remove(), 300);
-    }, duration);
-  },
-
-  getIcon(type) {
-    const icons = {
-      success: '✓',
-      error: '!',
-      info: 'i',
-      warning: '!'
-    };
-    return icons[type] || icons.info;
-  },
-
-  getTitle(type) {
-    const titles = {
-      success: 'Message Sent',
-      error: 'Delivery Failed',
-      info: 'Heads Up',
-      warning: 'Warning'
-    };
-    return titles[type] || titles.info;
-  },
-
-  success(message, duration) {
-    this.show(message, 'success', duration);
-  },
-
-  error(message, duration) {
-    this.show(message, 'error', duration);
-  },
-
-  info(message, duration) {
-    this.show(message, 'info', duration);
-  }
-};
-
-// Confetti Effect
 const Icons = {
   linkedin: `
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -106,6 +39,7 @@ const Portfolio = {
     this.setupTheme();
     this.setupLaunchSequence();
     this.setupEventListeners();
+    this.setupContactRocketOverlay();
     this.loadContent().finally(() => {
       this.setupScrollAnimations();
     });
@@ -167,7 +101,6 @@ const Portfolio = {
     ];
 
     const form = document.getElementById('contact-form');
-    const formStatus = document.getElementById('contact-status');
     if (!form) {
       return;
     }
@@ -272,19 +205,6 @@ const Portfolio = {
 
     const emailClientPromise = initEmailClient();
 
-    const setStatus = (message, color = '') => {
-      if (!formStatus) {
-        return;
-      }
-
-      formStatus.textContent = message;
-      formStatus.style.color = color || '';
-      window.clearTimeout(setStatus.timeoutId);
-      setStatus.timeoutId = window.setTimeout(() => {
-        formStatus.textContent = '';
-      }, 6000);
-    };
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -316,20 +236,78 @@ const Portfolio = {
         }
 
         await emailClient.send(emailConfig.serviceId, emailConfig.templateId, templateParams);
-        setStatus('Message sent successfully. I will get back to you shortly.', '#10b981');
-        Toast.success('Message sent successfully. I will get back to you shortly.');
         form.reset();
+        this.openContactRocketStatus('success', {
+          eyebrow: 'Transmission Delivered',
+          title: 'Message sent successfully',
+          message: 'Your message has been delivered successfully. I will review it and get back to you shortly.'
+        });
       } catch (error) {
         console.error('EmailJS error:', error);
-        const emailJsMessage = error?.text || error?.message || 'Unknown EmailJS error';
-        const statusCode = error?.status ? ` (${error.status})` : '';
-        setStatus(`EmailJS failed${statusCode}: ${emailJsMessage}`, '#ef4444');
-        Toast.error(`EmailJS failed${statusCode}: ${emailJsMessage}`);
+        this.openContactRocketStatus('error', {
+          eyebrow: 'Transmission Failed',
+          title: 'Sorry, the message could not be sent',
+          message: 'The form could not deliver your message this time. You can directly reach me at nikhil.codes@gmail.com and I will respond there.'
+        });
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
     });
+  },
+
+  setupContactRocketOverlay() {
+    const overlay = document.getElementById('contact-rocket-overlay');
+    const dismiss = document.getElementById('contact-rocket-dismiss');
+
+    if (!overlay || !dismiss) {
+      return;
+    }
+
+    const closeOverlay = () => {
+      window.clearTimeout(this.contactRocketTimer);
+      overlay.classList.remove('active');
+      window.setTimeout(() => {
+        overlay.setAttribute('aria-hidden', 'true');
+        overlay.removeAttribute('data-state');
+      }, 260);
+    };
+
+    dismiss.addEventListener('click', closeOverlay);
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay || event.target.classList.contains('contact-rocket-backdrop')) {
+        closeOverlay();
+      }
+    });
+
+    this.closeContactRocketStatus = closeOverlay;
+  },
+
+  openContactRocketStatus(state, copy) {
+    const overlay = document.getElementById('contact-rocket-overlay');
+    const eyebrow = document.getElementById('contact-rocket-eyebrow');
+    const title = document.getElementById('contact-rocket-title');
+    const message = document.getElementById('contact-rocket-message');
+
+    if (!overlay || !eyebrow || !title || !message) {
+      return;
+    }
+
+    window.clearTimeout(this.contactRocketTimer);
+    overlay.classList.remove('active');
+    overlay.removeAttribute('data-state');
+
+    window.setTimeout(() => {
+      overlay.dataset.state = state;
+      eyebrow.textContent = copy.eyebrow;
+      title.textContent = copy.title;
+      message.textContent = copy.message;
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('active');
+      this.contactRocketTimer = window.setTimeout(() => {
+        this.closeContactRocketStatus?.();
+      }, 7600);
+    }, 40);
   },
 
   // Load content dynamically
@@ -1052,25 +1030,26 @@ const Portfolio = {
 
     window.setTimeout(() => {
       overlay.classList.add('launch-ignite');
-    }, 360);
+    }, 180);
 
     window.setTimeout(() => {
       overlay.classList.add('launch-break');
-    }, 1600);
+    }, 1280);
 
     window.setTimeout(() => {
       overlay.classList.add('launch-liftoff');
-    }, 2550);
+    }, 2180);
 
     window.setTimeout(() => {
+      overlay.classList.add('launch-clearing');
       document.body.classList.add('launch-complete');
       window.sessionStorage?.setItem('portfolio_launch_seen', '1');
-    }, 4300);
+    }, 2920);
 
     window.setTimeout(() => {
       overlay.remove();
       document.body.classList.remove('launch-active');
-    }, 5200);
+    }, 3440);
   }
 };
 

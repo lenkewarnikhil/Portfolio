@@ -45,6 +45,19 @@
   </script>
 </head>
 <body>
+  <script>
+    try {
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const seenLaunch = window.sessionStorage && window.sessionStorage.getItem('portfolio_launch_seen') === '1';
+      if (!prefersReducedMotion && !seenLaunch) {
+        document.body.classList.add('launch-active');
+      } else {
+        document.body.classList.add('launch-complete');
+      }
+    } catch (error) {
+      document.body.classList.add('launch-complete');
+    }
+  </script>
   <div class="launch-overlay" id="launch-overlay" aria-hidden="true">
     <div class="launch-backdrop"></div>
     <div class="launch-pad">
@@ -308,7 +321,6 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
-                <p id="contact-status" class="contact-status" aria-live="polite"></p>
               </form>
 
               <div class="contact-links">
@@ -376,7 +388,26 @@
     </footer>
   </div>
 
-  <div id="toast-container" class="toast-container"></div>
+  <div class="contact-rocket-overlay" id="contact-rocket-overlay" aria-hidden="true">
+    <div class="contact-rocket-backdrop"></div>
+    <div class="contact-rocket-panel" role="status" aria-live="polite" aria-atomic="true">
+      <p class="eyebrow contact-rocket-eyebrow" id="contact-rocket-eyebrow">Transmission</p>
+      <div class="contact-rocket-stage">
+        <div class="contact-rocket" id="contact-rocket">
+          <div class="contact-rocket-body"></div>
+          <div class="contact-rocket-window"></div>
+          <div class="contact-rocket-fin contact-rocket-fin-left"></div>
+          <div class="contact-rocket-fin contact-rocket-fin-right"></div>
+          <div class="contact-rocket-flame-core"></div>
+          <div class="contact-rocket-flame-glow"></div>
+          <div class="contact-rocket-burst"></div>
+        </div>
+      </div>
+      <h3 class="contact-rocket-title" id="contact-rocket-title">Message status</h3>
+      <p class="contact-rocket-message" id="contact-rocket-message"></p>
+      <button type="button" class="btn btn-secondary contact-rocket-dismiss" id="contact-rocket-dismiss" aria-label="Close message status"><span>Close</span></button>
+    </div>
+  </div>
 
   <script src="./js/env.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
