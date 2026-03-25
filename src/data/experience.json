@@ -2,17 +2,17 @@
   "experience": [
     {
       "id": 1,
-      "title": "Software Engineer (Backend Lead)",
+      "title": "Software Engineer (Backend)",
       "company": "Chimera Technologies Pvt Ltd",
       "location": "Bangalore",
       "period": "June 2025 – Present",
       "type": "Full-time",
-      "description": "Leading backend development for an AI-powered review platform serving the pharmaceutical domain.",
+      "description": "Actively contributing to backend development for an AI-powered review platform serving the pharmaceutical domain.",
       "highlights": [
-        "Lead a team of 3-4 backend engineers delivering scalable systems",
+        "Actively contributed to backend systems for an AI-powered review platform",
         "Designed and developed data pipelines using FastAPI and PostgreSQL for high-volume AI data processing",
         "Implemented workflow orchestration and cron pipelines using Temporal for automated data processing",
-        "Built comprehensive data validation and auditing systems for AI chatbot/voicebot output evaluation",
+        "Built data validation and auditing systems for AI chatbot and voicebot output evaluation",
         "Deployed microservices on Kubernetes (OpenShift) using ArgoCD for CI/CD automation",
         "Integrated Azure Entra ID RBAC for enterprise-grade access control"
       ]
