@@ -1,5 +1,5 @@
 window.__ENV = {
-  EMAILJS_SERVICE_ID: 'service_ilyn8y2',
-  EMAILJS_TEMPLATE_ID: 'template_xs8vdsi',
-  EMAILJS_PUBLIC_KEY: '6q3Xz_LJuR1_exAtT'
+  EMAILJS_SERVICE_ID: 'service_2p9qye5',
+  EMAILJS_TEMPLATE_ID: 'template_jqgmoim',
+  EMAILJS_PUBLIC_KEY: 'bcGapQL41-kNwFn00'
 };
