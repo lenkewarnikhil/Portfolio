@@ -117,7 +117,7 @@
     </div>
   </footer>
 
-  <script src="./js/env.js"></script>
+
   <script src="./src/js/main.js"></script>
   <script>
     // Theme toggle logic (sync with index.html)
@@ -137,10 +137,7 @@
       if (!localStorage.getItem('theme')) applyTheme(e.matches);
     });
 
-    // Mobile menu toggle
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-      document.querySelector('.nav-links').classList.toggle('active');
-    });
+
 
     function parseMarkdown(md) {
       let html = md
