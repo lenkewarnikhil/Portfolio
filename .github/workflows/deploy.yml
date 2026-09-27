@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run test
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Railway Deployment info
+      run: |
+        echo "Railway handles deployment automatically when connected to the GitHub repo."
+        echo "Ensure this repo is linked in your Railway dashboard."

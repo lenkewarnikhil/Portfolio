@@ -1,0 +1,256 @@
+
+  <div className="scroll-progress" aria-hidden="true"></div>
+
+  <header className="site-header">
+    <div className="container nav-shell">
+      <a className="wordmark" href="#home" aria-label="Nikhil Lenkewar home">
+        <strong>Nikhil Lenkewar</strong>
+      </a>
+      <button className="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav className="nav-links">
+        <a className="is-active" href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#blog">Blogs</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div className="nav-actions">
+        <a href="#contact" className="btn btn-primary">Hire Me</a>
+        <button className="theme-toggle" aria-label="Toggle dark mode">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" className="hero section">
+      <div className="container hero-layout">
+        <div className="hero-content">
+          <p className="kicker">HI, I AM NIKHIL LENKEWAR</p>
+          <h1>Software Engineer <br />& <span className="highlight">Backend • Data • AI</span> Enthusiast</h1>
+          <p className="hero-intro" id="about-copy">I like understanding how things work, then making them dependable enough
+            for other people to build on.</p>
+          <div className="hero-actions">
+            <a className="btn btn-outline" href="./assets/resume.pdf" target="_blank">
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download CV
+            </a>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <img src="./assets/hero-illustration.jpg" alt="Developer Workspace Illustration" />
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" className="section section-light">
+      <div className="container">
+        <div className="section-heading text-center">
+          <h2>Projects Portfolio</h2>
+          <p className="section-note">Some of the projects I have successfully completed</p>
+        </div>
+        <div className="projects-grid"></div>
+      </div>
+    </section>
+
+    <section id="experience" className="section">
+      <div className="container">
+        <div className="section-heading text-center">
+          <p className="kicker">Building along the way</p>
+          <h2>Professional Milestones</h2>
+          <p className="section-note">The roles, responsibilities, and lessons that shaped how I approach engineering.</p>
+        </div>
+        <div className="experience-grid"></div>
+      </div>
+    </section>
+
+    <section id="skills" className="section section-light">
+      <div className="container">
+        <div className="section-heading text-center">
+          <p className="kicker">Tools for the journey</p>
+          <h2>What I build with</h2>
+          <p className="section-note">A practical toolkit for moving from a rough idea to a system people can rely on.</p>
+        </div>
+        <div className="skills-container"></div>
+      </div>
+    </section>
+
+    <section id="ai" className="section">
+      <div className="container">
+        <div className="section-heading text-center">
+          <p className="kicker">A horizon I'm exploring</p>
+          <h2>Systems that can reason</h2>
+          <p className="section-note">AI is most interesting to me when it is grounded in useful data, clear workflows, and
+            responsible engineering.</p>
+        </div>
+        <div className="ai-notes">
+          <div className="ai-card"><span>01</span><strong>RAG</strong>
+            <p>Connecting language models to information that matters.</p>
+          </div>
+          <div className="ai-card"><span>02</span><strong>Agentic AI</strong>
+            <p>Exploring systems that can plan, act, and stay observable.</p>
+          </div>
+          <div className="ai-card"><span>03</span><strong>LLM applications</strong>
+            <p>Building practical interfaces between intelligence and product.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" className="section section-light">
+      <div className="container">
+        <div className="section-heading text-center">
+          <p className="kicker">Blogs from the journey</p>
+          <h2>Things I've learned</h2>
+          <p className="section-note">Articles and insights on backend engineering, AI, cloud infrastructure, and the honest
+            version of learning.</p>
+        </div>
+        <div className="blog-grid"></div>
+      </div>
+    </section>
+
+    <section id="about" className="section">
+      <div className="container two-column align-center">
+        <div className="about-visual">
+          <div className="about-card">
+            <h3>Origin</h3>
+            <p>Where the journey began.</p>
+          </div>
+        </div>
+        <div className="about-content">
+          <p className="kicker">Curiosity is a useful compass.</p>
+          <h2>About Me</h2>
+          <p className="body-copy">My work sits at the intersection of backend engineering, data systems, and thoughtful
+            product delivery. I work with Python, APIs, workflows, cloud infrastructure, and the questions that appear
+            when software meets the real world.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" className="section section-light">
+      <div className="container contact-layout">
+        <div className="contact-info">
+          <p className="kicker">Get in touch</p>
+          <h2>Let's build.</h2>
+          <p className="lead">Open to thoughtful products, challenging systems, and useful collaborations.</p>
+          <div className="direct-links">
+            <a className="social-icon-link" href="mailto:lenkewarnikhil10@gmail.com" aria-label="Email Nikhil"
+              title="Email"><svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" stroke="currentColor"
+                stroke-width="2" fill="none">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg></a>
+            <a className="social-icon-link" href="https://www.linkedin.com/in/lenkewar-nikhil/" target="_blank"
+              rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"
+                width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg></a>
+            <a className="social-icon-link" href="https://github.com/lenkewarnikhil" target="_blank" rel="noopener"
+              aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24"
+                stroke="currentColor" stroke-width="2" fill="none">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                </path>
+              </svg></a>
+            <a className="social-icon-link" href="https://twitter.com/lenkewarnikhil" target="_blank" rel="noopener"
+              aria-label="Twitter" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path
+                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg></a>
+            <a className="social-icon-link" href="https://reddit.com/" target="_blank" rel="noopener" aria-label="Reddit"
+              title="Reddit"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path
+                  d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3s-1.35-3-3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 11.5c0-1.1.9-2 2-2 .64 0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.12-.8-.25-1.3-.92-1.3-1.94zm2 7.82c-.8-1.04-1.2-2.38-1.2-3.82 0-3.3 3.8-6 8.5-6s8.5 2.7 8.5 6-3.8 6-8.5 6-8.5-2.7-8.5-6zm15.4-4.7c-.38-1.22-1.2-2.27-2.3-3.12.38-.5.96-.82 1.6-.82 1.1 0 2 .9 2 2 0 1.02-.5 1.7-1.3 1.94z" />
+                <path
+                  d="M10.15 15.5c-1.23 0-2.22-.98-2.22-2.2s.99-2.2 2.22-2.2 2.22.98 2.22 2.2-.99 2.2-2.22 2.2zm5.7 0c-1.23 0-2.22-.98-2.22-2.2s.99-2.2 2.22-2.2 2.22.98 2.22 2.2-.99 2.2-2.22 2.2zm-4.25 3.32c-1.5 0-2.83-.55-3.66-1.42l1.1-1.1c.54.55 1.33.9 2.56.9 1.23 0 2.02-.35 2.56-.9l1.1 1.1c-.83.87-2.16 1.42-3.66 1.42z" />
+              </svg></a>
+          </div>
+        </div>
+        <form id="contact-form" className="contact-form">
+          <label htmlFor="name">Your name</label>
+          <input id="name" name="name" required type="text" placeholder="Your name" />
+
+          <label htmlFor="email">Your email</label>
+          <input id="email" name="email" required type="email" placeholder="you@example.com" />
+
+          <label htmlFor="subject">Subject</label>
+          <input id="subject" name="subject" required type="text" placeholder="How can we work together?" />
+
+          <label htmlFor="message">Message</label>
+          <textarea id="message" name="message" required rows="4" placeholder="Message"></textarea>
+
+          <button className="btn btn-primary submit-btn" type="submit">Send message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer className="footer">
+    <div className="footer-banger">
+      <div className="banger-content">
+        <h2 className="banger-title">Nikhil Lenkewar</h2>
+        <p className="banger-subtitle" style={{"marginBottom":"1rem"}}>Build · Learn · Explore · Repeat</p>
+        <div style={{"display":"flex","alignItems":"center","justifyContent":"center","gap":"0.5rem","marginBottom":"2rem"}}>
+          <img src="./assets/software-engineer.png" alt="Software Engineer" style={{"height":"48px","width":"auto","objectFit":"contain"}} />
+          <p style={{"color":"var(--text-muted)","margin":"0"}}>&nbsp;·&nbsp; Backend · Data · AI &nbsp;·&nbsp; Bangalore, India</p>
+        </div>
+      </div>
+      <div className="tech-marquee-wrapper">
+        <div className="tech-marquee">
+          <i className="devicon-python-plain"></i>
+          <i className="devicon-javascript-plain"></i>
+          <i className="devicon-typescript-plain"></i>
+          <i className="devicon-react-original"></i>
+          <i className="devicon-nodejs-plain"></i>
+          <i className="devicon-docker-plain"></i>
+          <i className="devicon-amazonwebservices-original"></i>
+          <i className="devicon-postgresql-plain"></i>
+          <i className="devicon-mongodb-plain"></i>
+          <i className="devicon-git-plain"></i>
+          <i className="devicon-cplusplus-plain"></i>
+          <i className="devicon-java-plain"></i>
+          <i className="devicon-github-original"></i>
+          <i className="devicon-fastapi-plain"></i>
+          <i className="devicon-kubernetes-plain"></i>
+          
+          <i className="devicon-python-plain"></i>
+          <i className="devicon-javascript-plain"></i>
+          <i className="devicon-typescript-plain"></i>
+          <i className="devicon-react-original"></i>
+          <i className="devicon-nodejs-plain"></i>
+          <i className="devicon-docker-plain"></i>
+          <i className="devicon-amazonwebservices-original"></i>
+          <i className="devicon-postgresql-plain"></i>
+          <i className="devicon-mongodb-plain"></i>
+          <i className="devicon-git-plain"></i>
+          <i className="devicon-cplusplus-plain"></i>
+          <i className="devicon-java-plain"></i>
+          <i className="devicon-github-original"></i>
+          <i className="devicon-fastapi-plain"></i>
+          <i className="devicon-kubernetes-plain"></i>
+        </div>
+      </div>
+    </div>
+    <div className="container footer-centered" style={{"textAlign":"center","padding":"2rem 0"}}>
+      <p className="copyright">© 2026 Nikhil Lenkewar</p>
+    </div>
+  </footer>
+
+  
+
+
+  
+  
+  
