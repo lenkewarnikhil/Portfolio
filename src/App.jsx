@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import ReCAPTCHA from 'react-google-recaptcha';
 import profileData from './data/profile.json';
 import experienceData from './data/experience.json';
 import projectsData from './data/projects.json';
@@ -12,6 +13,10 @@ const iconNames = {
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   const [statusModal, setStatusModal] = useState({ visible: false, title: '', message: '' });
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [submitCooldown, setSubmitCooldown] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const recaptchaRef = useRef(null);
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', theme === 'dark');
@@ -20,8 +25,50 @@ function App() {
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
+  // Track which section is in view and highlight the corresponding nav link
+  useEffect(() => {
+    const sections = document.querySelectorAll('main section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-35% 0px -55%' }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleMenu = () => {
+    setMenuOpen(prev => !prev);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   const handleContactSubmit = async (e) => {
     e.preventDefault();
+
+    // Honeypot check: if the hidden field is filled, it's a bot
+    if (e.target.website?.value) return;
+
+    // Throttle check
+    if (submitCooldown) {
+      setStatusModal({ visible: true, title: 'Please wait', message: 'You recently sent a message. Please wait a moment before trying again.' });
+      return;
+    }
+
+    // reCAPTCHA verification
+    const captchaToken = recaptchaRef.current?.getValue();
+    if (!captchaToken) {
+      setStatusModal({ visible: true, title: 'CAPTCHA required', message: 'Please complete the "I\'m not a robot" verification before sending.' });
+      return;
+    }
+
     const btn = e.target.querySelector('button');
     const original = btn.innerHTML;
     btn.disabled = true;
@@ -34,9 +81,15 @@ function App() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       e.target.reset();
+      recaptchaRef.current?.reset();
       setStatusModal({ visible: true, title: 'Message sent successfully', message: 'Your message has been delivered. I will get back to you shortly.' });
+
+      // Throttle: prevent rapid re-submission for 10 seconds
+      setSubmitCooldown(true);
+      setTimeout(() => setSubmitCooldown(false), 10000);
     } catch (error) {
       console.error(error);
+      recaptchaRef.current?.reset();
       setStatusModal({ visible: true, title: 'Please reach out directly', message: `The form could not deliver your message this time. Email ${import.meta.env.VITE_EMAIL} directly.` });
     } finally {
       btn.disabled = false;
@@ -53,16 +106,16 @@ function App() {
           <a className="wordmark" href="#home" aria-label="Nikhil Lenkewar home">
             <strong>Nikhil Lenkewar</strong>
           </a>
-          <button className="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} onClick={toggleMenu}>
             <span></span><span></span><span></span>
           </button>
-          <nav className="nav-links">
-            <a className="is-active" href="#projects">Projects</a>
-            <a href="#experience">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#blog">Blogs</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+          <nav className={`nav-links${menuOpen ? ' is-open' : ''}`}>
+            <a className={activeSection === 'projects' ? 'is-active' : ''} href="#projects" onClick={closeMenu}>Projects</a>
+            <a className={activeSection === 'experience' ? 'is-active' : ''} href="#experience" onClick={closeMenu}>Experience</a>
+            <a className={activeSection === 'skills' ? 'is-active' : ''} href="#skills" onClick={closeMenu}>Skills</a>
+            <a className={activeSection === 'blog' ? 'is-active' : ''} href="#blog" onClick={closeMenu}>Blogs</a>
+            <a className={activeSection === 'about' ? 'is-active' : ''} href="#about" onClick={closeMenu}>About</a>
+            <a className={activeSection === 'contact' ? 'is-active' : ''} href="#contact" onClick={closeMenu}>Contact</a>
           </nav>
           <div className="nav-actions">
             <a href="#contact" className="btn btn-primary">Hire Me</a>
@@ -83,7 +136,7 @@ function App() {
               <h1>Software Engineer <br />& <span className="highlight">Backend • Data • AI</span> Enthusiast</h1>
               <p className="hero-intro" id="about-copy">{profileData.bio}</p>
               <div className="hero-actions">
-                <a className="btn btn-outline" href="./assets/resume.pdf" target="_blank">
+                <a className="btn btn-outline" href="./assets/resume.pdf" target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
@@ -256,19 +309,34 @@ function App() {
               </div>
             </div>
             <form id="contact-form" className="contact-form" onSubmit={handleContactSubmit}>
+              {/* Honeypot: hidden field to trap bots */}
+              <input type="text" name="website" autoComplete="off" tabIndex={-1} aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }} />
+
               <label htmlFor="name">Your name</label>
-              <input id="name" name="name" required type="text" placeholder="Your name" />
+              <input id="name" name="name" required type="text" placeholder="Your name" maxLength={100} />
 
               <label htmlFor="email">Your email</label>
-              <input id="email" name="email" required type="email" placeholder="you@example.com" />
+              <input id="email" name="email" required type="email" placeholder="you@example.com" maxLength={254} />
 
               <label htmlFor="subject">Subject</label>
-              <input id="subject" name="subject" required type="text" placeholder="How can we work together?" />
+              <input id="subject" name="subject" required type="text" placeholder="How can we work together?" maxLength={200} />
 
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" required rows="4" placeholder="Message"></textarea>
+              <textarea id="message" name="message" required rows="4" placeholder="Message" maxLength={2000}></textarea>
 
-              <button className="btn btn-primary submit-btn" type="submit">Send message</button>
+              {import.meta.env.VITE_RECAPTCHA_SITE_KEY && (
+                <div style={{ margin: '1rem 0' }}>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                    theme={theme}
+                  />
+                </div>
+              )}
+
+              <button className="btn btn-primary submit-btn" type="submit" disabled={submitCooldown}>
+                {submitCooldown ? 'Please wait…' : 'Send message'}
+              </button>
             </form>
           </div>
         </section>
