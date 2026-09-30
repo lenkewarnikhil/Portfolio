@@ -1,44 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
-function parseMarkdown(md) {
-  let html = md
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^\- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-  
-  return html.split('\n\n')
-    .map(para => para.trim())
-    .filter(para => para.length > 0)
-    .map(para => para.startsWith('<') ? para : `<p>${para}</p>`)
-    .join('\n')
-    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+// Configure marked: disable raw HTML input so injected tags are escaped
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+});
+
+// DOMPurify hook: only allow safe URL protocols (blocks javascript:, data:, etc.)
+DOMPurify.addHook('afterSanitizeAttributes', (node) => {
+  if (node.hasAttribute('href')) {
+    const href = node.getAttribute('href');
+    if (href && !/^(https?:\/\/|\/|#|mailto:)/i.test(href)) {
+      node.removeAttribute('href');
+    }
+  }
+  // Force external links to open safely
+  if (node.tagName === 'A' && node.getAttribute('href')?.startsWith('http')) {
+    node.setAttribute('target', '_blank');
+    node.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+
+function renderMarkdown(md) {
+  const rawHtml = marked.parse(md);
+  return DOMPurify.sanitize(rawHtml, {
+    ALLOWED_TAGS: [
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      'p', 'br', 'hr',
+      'ul', 'ol', 'li',
+      'strong', 'em', 'del', 'code', 'pre',
+      'a', 'blockquote',
+      'table', 'thead', 'tbody', 'tr', 'th', 'td',
+      'img',
+    ],
+    ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'title', 'class'],
+  });
 }
 
 export default function Blog() {
   const { slug } = useParams();
   const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(`/assets/posts/${slug}.md`)
+    const controller = new AbortController();
+
+    setContent('');
+    setLoading(true);
+    setError(false);
+
+    fetch(`/assets/posts/${slug}.md`, { signal: controller.signal })
       .then(res => {
         if (!res.ok) throw new Error('Not found');
         return res.text();
       })
       .then(text => {
-        setContent(parseMarkdown(text));
+        setContent(renderMarkdown(text));
         setError(false);
+        setLoading(false);
       })
-      .catch(() => {
+      .catch(err => {
+        if (err.name === 'AbortError') return; // Ignore cancelled requests
         setError(true);
+        setLoading(false);
       });
+
+    return () => controller.abort();
   }, [slug]);
 
   return (
@@ -66,6 +97,8 @@ export default function Blog() {
               </div>
               <p style={{ color: 'var(--text-main)' }}>Article not found. <a href="/#blog" style={{ color: 'var(--primary-color)' }}>Return to blogs</a></p>
             </>
+          ) : loading ? (
+            <p style={{ color: 'var(--text-muted)', textAlign: 'center' }}>Loading article…</p>
           ) : (
             <>
               <div className="back-link" style={{ marginBottom: '3rem' }}>

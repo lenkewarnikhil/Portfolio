@@ -1,31 +1,46 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [main]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [main]
 
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run test
+      - uses: actions/checkout@v4
 
-  deploy:
-    needs: test
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Railway Deployment info
-      run: |
-        echo "Railway handles deployment automatically when connected to the GitHub repo."
-        echo "Ensure this repo is linked in your Railway dashboard."
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Verify build
+        run: npm run build
+        env:
+          # Provide dummy values so the build completes in CI.
+          # Real values are injected by Railway at deploy time.
+          VITE_EMAIL=ci@test.com
+          VITE_LINKEDIN_URL=https://linkedin.com
+          VITE_GITHUB_URL=https://github.com
+          VITE_TWITTER_URL=https://twitter.com
+          VITE_REDDIT_URL=https://reddit.com
+          VITE_EMAILJS_SERVICE_ID=ci_test
+          VITE_EMAILJS_TEMPLATE_ID=ci_test
+          VITE_EMAILJS_PUBLIC_KEY=ci_test
+          VITE_RECAPTCHA_SITE_KEY=ci_test
+
+# NOTE: Deployment is handled by Railway's GitHub integration.
+# Railway auto-deploys on push to main — no deploy job needed here.
