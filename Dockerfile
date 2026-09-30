@@ -31,5 +31,5 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080
 
-# Replace ${PORT} with runtime env (default 8080 if not set), then start
-CMD sh -c "sed -i \"s/\${PORT}/${PORT:-8080}/g\" /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+# At startup: inject the PORT env var (Railway sets this), defaulting to 8080
+CMD sh -c 'sed -i "s/__PORT__/${PORT:-8080}/g" /etc/nginx/conf.d/default.conf && nginx -g "daemon off;"'
