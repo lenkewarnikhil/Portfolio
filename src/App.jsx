@@ -90,7 +90,8 @@ function App() {
     } catch (error) {
       console.error(error);
       recaptchaRef.current?.reset();
-      setStatusModal({ visible: true, title: 'Please reach out directly', message: `The form could not deliver your message this time. Email ${import.meta.env.VITE_EMAIL} directly.` });
+      const contactEmail = import.meta.env.VITE_EMAIL || profileData.email;
+      setStatusModal({ visible: true, title: 'Please reach out directly', message: `The form could not deliver your message this time. Email ${contactEmail} directly.` });
     } finally {
       btn.disabled = false;
       btn.innerHTML = original;
@@ -147,7 +148,7 @@ function App() {
               </div>
             </div>
             <div className="hero-visual">
-              <img src="/assets/hero-illustration.jpg" alt="Developer Workspace Illustration" />
+              <img src="/assets/hero-illustration.png" alt="Developer Workspace Illustration" />
             </div>
           </div>
         </section>
@@ -174,7 +175,7 @@ function App() {
                     ))}
                   </div>
                   <a className="project-link" href={item.link} target="_blank" rel="noopener noreferrer">
-                    View project <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+                    View project <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
                   </a>
                 </article>
               ))}
@@ -344,27 +345,28 @@ function App() {
 
       <footer className="footer">
         <div className="footer-banger">
+          {/* Floating tech icons background */}
+          <div className="floating-icons" aria-hidden="true">
+            {[
+              'python', 'javascript', 'react', 'docker', 'kubernetes', 'html5', 'nodejs', 'mongodb',
+              'java', 'cplusplus', 'amazonwebservices', 'azure', 'mysql', 'git', 'github', 'jenkins',
+              'argo', 'linux', 'nginx', 'redis', 'go', 'rust', 'graphql', 'postgresql', 'fastapi'
+            ].map((icon, i) => (
+              <i key={i} className={`devicon-${icon}-plain float-icon float-delay-${i % 8}`}></i>
+            ))}
+          </div>
           <div className="banger-content">
             <h2 className="banger-title">Nikhil Lenkewar</h2>
-            <p className="banger-subtitle" style={{ marginBottom: '1rem' }}>Build · Learn · Explore · Repeat</p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
-              <img src="/assets/software-engineer.png" alt="Software Engineer" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-              <p style={{ color: 'var(--text-muted)', margin: '0' }}>&nbsp;·&nbsp; Backend · Data · AI &nbsp;·&nbsp; Bangalore, India</p>
+            <p className="banger-subtitle">Build · Learn · Explore · Repeat</p>
+            <div className="banger-tagline">
+              <img src="/assets/software-engineer.png" alt="Software Engineer" />
+              <p>&nbsp;·&nbsp; Backend · Data · AI &nbsp;·&nbsp; Bangalore, India</p>
             </div>
           </div>
-          <div className="tech-marquee-wrapper">
-            <div className="tech-marquee">
-              {Object.keys(iconNames).slice(0, 15).map(tech => (
-                <i key={tech} className={`devicon-${iconNames[tech]}-plain`}></i>
-              ))}
-              {Object.keys(iconNames).slice(0, 15).map(tech => (
-                <i key={tech + '2'} className={`devicon-${iconNames[tech]}-plain`}></i>
-              ))}
-            </div>
+
+          <div className="container footer-centered" style={{ textAlign: 'center', padding: '4rem 0 0 0', position: 'relative', zIndex: 10 }}>
+            <p className="copyright">© 2026 Nikhil Lenkewar</p>
           </div>
-        </div>
-        <div className="container footer-centered" style={{ textAlign: 'center', padding: '2rem 0' }}>
-          <p className="copyright">© 2026 Nikhil Lenkewar</p>
         </div>
       </footer>
 

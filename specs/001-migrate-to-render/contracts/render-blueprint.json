@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RenderStaticSiteBlueprint",
+  "type": "object",
+  "required": ["services"],
+  "properties": {
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "name", "runtime", "buildCommand", "staticPublishPath", "routes"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["web"]
+          },
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": ["static"]
+          },
+          "buildCommand": {
+            "type": "string",
+            "default": "npm run build"
+          },
+          "staticPublishPath": {
+            "type": "string",
+            "default": "dist"
+          },
+          "routes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "source", "destination"],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["rewrite", "redirect"]
+                },
+                "source": {
+                  "type": "string"
+                },
+                "destination": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "envVars": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["key"],
+              "properties": {
+                "key": { "type": "string" },
+                "value": { "type": "string" },
+                "sync": { "type": "boolean" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

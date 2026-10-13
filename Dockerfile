@@ -1,3 +1,6 @@
+# NOTE: Production deployment has migrated to Render Static Sites (via render.yaml).
+# This Dockerfile is retained for local container testing and multi-cloud container portability.
+#
 # ── Stage 1: Build ──────────────────────────────────────────────
 FROM node:20-alpine AS builder
 WORKDIR /app
