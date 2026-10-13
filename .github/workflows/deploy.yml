@@ -31,16 +31,16 @@ jobs:
         run: npm run build
         env:
           # Provide dummy values so the build completes in CI.
-          # Real values are injected by Railway at deploy time.
-          VITE_EMAIL=ci@test.com
-          VITE_LINKEDIN_URL=https://linkedin.com
-          VITE_GITHUB_URL=https://github.com
-          VITE_TWITTER_URL=https://twitter.com
-          VITE_REDDIT_URL=https://reddit.com
-          VITE_EMAILJS_SERVICE_ID=ci_test
-          VITE_EMAILJS_TEMPLATE_ID=ci_test
-          VITE_EMAILJS_PUBLIC_KEY=ci_test
-          VITE_RECAPTCHA_SITE_KEY=ci_test
+          # Real values are injected by Render at deploy time.
+          VITE_EMAIL: ci@test.com
+          VITE_LINKEDIN_URL: https://linkedin.com
+          VITE_GITHUB_URL: https://github.com
+          VITE_TWITTER_URL: https://twitter.com
+          VITE_REDDIT_URL: https://reddit.com
+          VITE_EMAILJS_SERVICE_ID: ci_test
+          VITE_EMAILJS_TEMPLATE_ID: ci_test
+          VITE_EMAILJS_PUBLIC_KEY: ci_test
+          VITE_RECAPTCHA_SITE_KEY: ci_test
 
-# NOTE: Deployment is handled by Railway's GitHub integration.
-# Railway auto-deploys on push to main — no deploy job needed here.
+# NOTE: Deployment is handled by Render's GitHub integration.
+# Render auto-deploys on push to main — no deploy job needed here.
