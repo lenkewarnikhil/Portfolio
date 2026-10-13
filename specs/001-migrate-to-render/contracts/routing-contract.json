@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PortfolioRoutingContract",
+  "type": "object",
+  "required": ["spaRewriteRule", "supportedRoutes"],
+  "properties": {
+    "spaRewriteRule": {
+      "type": "object",
+      "required": ["source", "destination", "type"],
+      "properties": {
+        "source": { "type": "string", "const": "/*" },
+        "destination": { "type": "string", "const": "/index.html" },
+        "type": { "type": "string", "const": "rewrite" }
+      }
+    },
+    "supportedRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "pageTitle", "authRequired"],
+        "properties": {
+          "path": { "type": "string" },
+          "pageTitle": { "type": "string" },
+          "authRequired": { "type": "boolean", "const": false }
+        }
+      }
+    }
+  }
+}
