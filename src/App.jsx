@@ -16,7 +16,34 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitCooldown, setSubmitCooldown] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const recaptchaRef = useRef(null);
+
+  const projectCategories = [
+    { id: 'all', label: 'All Projects' },
+    { id: 'backend', label: 'Backend & APIs' },
+    { id: 'ai', label: 'AI & LLMs' },
+    { id: 'cloud', label: 'Cloud & Infrastructure' }
+  ];
+
+  const filteredProjects = selectedCategory === 'all'
+    ? projectsData.projects
+    : projectsData.projects.filter(p => p.category === selectedCategory);
+
+  const handleCopyEmail = () => {
+    const emailToCopy = import.meta.env.VITE_EMAIL || profileData.email;
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(emailToCopy).then(() => {
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2000);
+      }).catch(() => {
+        setStatusModal({ visible: true, title: 'Email Address', message: `Contact: ${emailToCopy}` });
+      });
+    } else {
+      setStatusModal({ visible: true, title: 'Email Address', message: `Contact: ${emailToCopy}` });
+    }
+  };
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', theme === 'dark');
@@ -100,6 +127,8 @@ function App() {
 
   return (
     <>
+      <a href="#main" className="skip-link">Skip to main content</a>
+
       <div className="scroll-progress" aria-hidden="true"></div>
 
       <header className="site-header">
@@ -129,14 +158,21 @@ function App() {
         </div>
       </header>
 
-      <main>
+      <main id="main">
         <section id="home" className="hero section">
           <div className="container hero-layout">
             <div className="hero-content">
+              <div className="availability-badge" role="status" aria-label="Current status: Available for opportunities">
+                <span className="availability-dot" aria-hidden="true"></span>
+                <span>Available for Opportunities</span>
+              </div>
               <p className="kicker">HI, I AM {profileData.name.toUpperCase()}</p>
               <h1>Software Engineer <br />& <span className="highlight">Backend • Data • AI</span> Enthusiast</h1>
               <p className="hero-intro" id="about-copy">{profileData.bio}</p>
               <div className="hero-actions">
+                <a className="btn btn-primary" href="#projects">
+                  View Projects
+                </a>
                 <a className="btn btn-outline" href="./assets/resume.pdf" target="_blank" rel="noopener noreferrer">
                   <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -145,6 +181,23 @@ function App() {
                   </svg>
                   Download CV
                 </a>
+                <button
+                  type="button"
+                  className="copy-email-btn"
+                  onClick={handleCopyEmail}
+                  aria-label="Copy email address to clipboard"
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>{copiedEmail ? 'Copied!' : 'Copy Email'}</span>
+                </button>
+                {copiedEmail && (
+                  <span className="copy-toast" role="status" aria-live="polite">
+                    Copied!
+                  </span>
+                )}
               </div>
             </div>
             <div className="hero-visual">
@@ -159,14 +212,35 @@ function App() {
               <h2>Projects Portfolio</h2>
               <p className="section-note">Some of the projects I have successfully completed</p>
             </div>
+
+            <div className="project-filters" role="tablist" aria-label="Filter projects by category">
+              {projectCategories.map(cat => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedCategory === cat.id}
+                  className={`filter-btn ${selectedCategory === cat.id ? 'is-active' : ''}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
             <div className="projects-grid">
-              {projectsData.projects.map(item => (
+              {filteredProjects.map(item => (
                 <article key={item.id} className="project-card">
                   <div className="project-top">
                     <span>{item.status}</span>
                     <span>{item.year}</span>
                   </div>
-                  <img src={`/assets/project-previews/project-${item.id}.svg`} alt={`${item.title} Preview`} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px', marginBottom: '1.5rem' }} />
+                  <img
+                    src={`/assets/project-previews/project-${item.id}.svg`}
+                    alt={`${item.title} Preview`}
+                    loading="lazy"
+                    style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '6px', marginBottom: '1.5rem' }}
+                  />
                   <h3>{item.title}</h3>
                   <p><strong>{item.tagline}</strong><br />{item.description}</p>
                   <div className="tags">
@@ -174,9 +248,19 @@ function App() {
                       <span key={tech}><i className={`devicon-${iconNames[tech] || 'code'}-plain`} aria-hidden="true"></i>{tech}</span>
                     ))}
                   </div>
-                  <a className="project-link" href={item.link} target="_blank" rel="noopener noreferrer">
-                    View project <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
-                  </a>
+                  <div className="project-links-group">
+                    <a className="project-link" href={item.link} target="_blank" rel="noopener noreferrer">
+                      View project <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+                    </a>
+                    {item.github && (
+                      <a className="project-github-link" href={item.github} target="_blank" rel="noopener noreferrer" aria-label={`${item.title} source code on GitHub`}>
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" aria-hidden="true">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        <span>Code</span>
+                      </a>
+                    )}
+                  </div>
                 </article>
               ))}
             </div>
@@ -194,7 +278,7 @@ function App() {
               {[...experienceData.experience].reverse().map(item => (
                 <article key={item.id} className="experience-card">
                   <div className="experience-marker">
-                    <img src={`/assets/company-logos/company-${item.id}.svg`} alt={`${item.company} logo`} />
+                    <img src={`/assets/company-logos/company-${item.id}.svg`} alt={`${item.company} logo`} loading="lazy" />
                     <span className="experience-dot"></span>
                     <span className="experience-date">{item.period}</span>
                   </div>
@@ -359,7 +443,7 @@ function App() {
             <h2 className="banger-title">Nikhil Lenkewar</h2>
             <p className="banger-subtitle">Build · Learn · Explore · Repeat</p>
             <div className="banger-tagline">
-              <img src="/assets/software-engineer.png" alt="Software Engineer" />
+              <img src="/assets/software-engineer.png" alt="Software Engineer" loading="lazy" />
               <p>&nbsp;·&nbsp; Backend · Data · AI &nbsp;·&nbsp; Bangalore, India</p>
             </div>
           </div>

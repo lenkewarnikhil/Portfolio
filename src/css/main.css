@@ -1228,3 +1228,238 @@ p {
     text-align: center;
   }
 }
+
+/* ==========================================================================
+   Accessibility: Skip Link
+   ========================================================================== */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--primary-color);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--text-main);
+}
+
+/* ==========================================================================
+   Hero Badges & CTAs
+   ========================================================================== */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Project Category Filter Bar
+   ========================================================================== */
+.project-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 2rem 0 3rem 0;
+}
+
+.filter-btn {
+  background: var(--card-bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+.filter-btn:hover {
+  color: var(--text-main);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.filter-btn.is-active {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+}
+
+.project-links-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.project-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-github-link:hover {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Copy Email Quick Action & Feedback Toast
+   ========================================================================== */
+.copy-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px dashed var(--border-color);
+  color: var(--text-muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.copy-email-btn:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background: rgba(0, 102, 255, 0.05);
+}
+
+.copy-toast {
+  display: inline-block;
+  background: var(--text-main);
+  color: var(--bg-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(4px); }
+  15%, 85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+/* ==========================================================================
+   Blog Reader Syntax Highlighting & Code Blocks
+   ========================================================================== */
+.blog-post-article pre {
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 1.25rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-post-article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.blog-post-article :not(pre) > code {
+  background: rgba(125, 125, 125, 0.15);
+  color: var(--primary-color);
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+.blog-post-article blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+.blog-post-article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
