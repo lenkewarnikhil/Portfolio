@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProjectsDataSchema",
+  "type": "object",
+  "required": ["projects"],
+  "properties": {
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "tagline", "category", "description", "tags", "technologies", "year", "status", "link"],
+        "properties": {
+          "id": { "type": "integer" },
+          "title": { "type": "string" },
+          "tagline": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["backend", "ai", "cloud", "research"]
+          },
+          "description": { "type": "string" },
+          "longDescription": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "technologies": { "type": "array", "items": { "type": "string" } },
+          "year": { "type": "integer" },
+          "status": { "type": "string" },
+          "highlights": { "type": "array", "items": { "type": "string" } },
+          "link": { "type": "string", "format": "uri" },
+          "github": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}

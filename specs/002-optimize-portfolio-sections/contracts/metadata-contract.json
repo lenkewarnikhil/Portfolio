@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HtmlMetadataContract",
+  "type": "object",
+  "required": ["openGraph", "twitterCard", "structuredData"],
+  "properties": {
+    "openGraph": {
+      "type": "object",
+      "required": ["og:type", "og:title", "og:description", "og:image"],
+      "properties": {
+        "og:type": { "type": "string", "const": "website" },
+        "og:title": { "type": "string" },
+        "og:description": { "type": "string" },
+        "og:image": { "type": "string" }
+      }
+    },
+    "twitterCard": {
+      "type": "object",
+      "required": ["twitter:card", "twitter:title", "twitter:description"],
+      "properties": {
+        "twitter:card": { "type": "string", "const": "summary_large_image" },
+        "twitter:title": { "type": "string" },
+        "twitter:description": { "type": "string" }
+      }
+    },
+    "structuredData": {
+      "type": "object",
+      "required": ["@context", "@type", "name", "jobTitle"],
+      "properties": {
+        "@context": { "type": "string", "const": "https://schema.org" },
+        "@type": { "type": "string", "const": "Person" },
+        "name": { "type": "string" },
+        "jobTitle": { "type": "string" }
+      }
+    }
+  }
+}
